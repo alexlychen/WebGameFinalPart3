@@ -52,7 +52,8 @@ var scenes;
             changeScene();
         };
         return Intro;
-    })(objects.Scene);
+    }(objects.Scene));
     scenes.Intro = Intro;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=intro.js.map

@@ -1,0 +1,50 @@
+1. Alex : 647 - 533 - 8333 Email:alex.liyi.chen@gmail.com github: alexlchen
+2. Giho Kim :  416 - 906 - 4789 Email: Kihokkang@gmail.com github: kkh0811
+3. Sisi Li : 416 - 833 - 2598 Emial: vivianss0301@gmail.com  
+
+
+* Crazy Bird : https://github.com/kkh0811/Assignment3.git
+
+Part1  ( Monday April 4)
+1) First draft of External Game Document
+2) Menu Scene : 
+- Play
+- Instructions
+- Exit
+
+------------------------------------------------------------------------
+
+
+Part2 ( Monday April 11 )
+1) First & Second Working Levels 
+Level 1: require 1000 points to change Level 2 ( Easy )
+Level 2: require 1500 points to change Level 3 ( Medium )
+
+2) Basic Game Mechanics
+- Enemy: Attck animation ( Alex )
+- Player: the main input may be a combination of mouse and keyboard ( Sisi )
+
+
+3) Scoring System : Need to update 
+
+* Requirements: New Background image for Level 2
+Add new enemy on Level 2 
+------------------------------------------------------------------------
+
+Part3 ( Moday April 18 )
+1) Third Working Level & Instructions Screen 
+Level 3: No require scores ???? ( Hard )
+
+2) Instructions Screen upgraded based on Part3
+
+3) Game-Over Screen:
+- Play Again
+- Exit to Menu
+
+4) Presentation
+- PPT
+- Practice
+
+* Requirements: New Background image for Level 3
+Add new enemy as a Boss on Level 3
+

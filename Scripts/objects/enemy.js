@@ -50,7 +50,8 @@ var objects;
             this._checkBounds((-config.Screen.WIDTH) * 2);
         };
         return Enemy;
-    })(objects.GameObject);
+    }(objects.GameObject));
     objects.Enemy = Enemy;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=enemy.js.map

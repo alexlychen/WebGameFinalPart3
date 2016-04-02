@@ -67,7 +67,8 @@ var objects;
             //this._shuffleImages("");
         };
         return Player;
-    })(createjs.Bitmap);
+    }(createjs.Bitmap));
     objects.Player = Player;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=player.js.map

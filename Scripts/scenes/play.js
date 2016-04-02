@@ -87,7 +87,8 @@ var scenes;
             }
         };
         return Play;
-    })(objects.Scene);
+    }(objects.Scene));
     scenes.Play = Play;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=play.js.map
