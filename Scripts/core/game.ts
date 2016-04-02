@@ -32,8 +32,11 @@ var end: scenes.End;
 // Add my assets
 var assetData: objects.Asset[] = [
     // add images
-    { id: "MainBackground", src: "../../Assets/images/secondback.jpg" },
+    { id: "MenuBackground", src: "../../Assets/images/MenuBackground.png" },
     { id: "StartButton", src: "../../Assets/images/StartButton.png" },
+    { id: "PlayButton", src: "../../Assets/images/PlayButton.png" },
+    { id: "InstructionButton", src: "../../Assets/images/InstructionButton.png" },
+    { id: "ExitButton", src: "../../Assets/images/ExitButton.png" },
     { id: "RestartButton", src: "../../Assets/images/RestartButton.png" },
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "forest", src: "../../Assets/images/background2.png" },

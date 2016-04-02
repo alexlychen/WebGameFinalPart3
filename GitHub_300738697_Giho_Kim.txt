@@ -1,3 +1,0 @@
-github: https://github.com/kkh0811/Assignment3.git
-
-url: http://gihoassign3.azurewebsites.net/

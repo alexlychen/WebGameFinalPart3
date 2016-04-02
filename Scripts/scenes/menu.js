@@ -29,16 +29,23 @@ var scenes;
         // Start Method
         Menu.prototype.start = function () {
             //Add background
-            this._backgroundImage = new createjs.Bitmap(assets.getResult("MainBackground"));
+            this._backgroundImage = new createjs.Bitmap(assets.getResult("MenuBackground"));
             this.addChild(this._backgroundImage);
-            //Add Menu Label
-            this._menuLabel = new objects.Label("Are you ready?", "60px Candara Bold Italic", "#FFFFFF", config.Screen.CENTER_X, config.Screen.CENTER_Y - 210, true);
-            this.addChild(this._menuLabel);
-            // add the Start button to the MENU scene
-            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X - 10, config.Screen.CENTER_Y + 175, true);
-            this.addChild(this._startButton);
-            // Start Button event listener
-            this._startButton.on("click", this._startButtonClick, this);
+            // add the PlayButton to the MENU scene
+            this._playButton = new objects.Button("PlayButton", config.Screen.CENTER_X - 215, config.Screen.CENTER_Y - 75, true);
+            this.addChild(this._playButton);
+            // Play Button event listener
+            this._playButton.on("click", this._playButtonClick, this);
+            // add the InstructionButton to the MENU scene
+            this._instructionButton = new objects.Button("InstructionButton", config.Screen.CENTER_X - 15, config.Screen.CENTER_Y - 75, true);
+            this.addChild(this._instructionButton);
+            // InstructionButton event listener
+            this._instructionButton.on("click", this._instructionButtonClick, this);
+            // add the ExitButton to the MENU scene
+            this._exitButton = new objects.Button("ExitButton", config.Screen.CENTER_X + 180, config.Screen.CENTER_Y - 75, true);
+            this.addChild(this._exitButton);
+            // Exit Button event listener
+            this._exitButton.on("click", this._exitButtonClick, this);
             // add this scene to the global stage container
             stage.addChild(this);
         };
@@ -46,13 +53,29 @@ var scenes;
         Menu.prototype.update = function () {
         };
         //EVENT HANDLERS ++++++++++++++++++++
-        // StartButton click event handler
-        Menu.prototype._startButtonClick = function (event) {
-            // Switch to the INTRO Scene
+        // PlayButton click event handler
+        Menu.prototype._playButtonClick = function (event) {
             // Add click sound
             createjs.Sound.play("bgmchicken");
+            // Switch to the Play Scene
+            scene = config.Scene.PLAY;
+            changeScene();
+        };
+        // InstructionButton click event handler
+        Menu.prototype._instructionButtonClick = function (event) {
+            // Add click sound
+            createjs.Sound.play("bgmchicken");
+            // Switch to the INTRO Scene
             scene = config.Scene.INTRO;
             changeScene();
+        };
+        // ExitButton click event handler
+        Menu.prototype._exitButtonClick = function (event) {
+            // Add click sound
+            createjs.Sound.play("bgmchicken");
+            // Close the game
+            window.open('', '_self', '');
+            window.close();
         };
         return Menu;
     })(objects.Scene);
