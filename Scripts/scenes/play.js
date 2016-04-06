@@ -69,7 +69,7 @@ var scenes;
             var _this = this;
             this._forest.update();
             this._bonus.update();
-            this._player.update();
+            this._player.update(controls);
             this._enemies.forEach(function (enemy) {
                 enemy.update();
                 _this._collision.check(enemy);
@@ -87,8 +87,7 @@ var scenes;
             }
         };
         return Play;
-    }(objects.Scene));
+    })(objects.Scene);
     scenes.Play = Play;
 })(scenes || (scenes = {}));
-
 //# sourceMappingURL=play.js.map

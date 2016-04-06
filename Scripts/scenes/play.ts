@@ -90,7 +90,7 @@ module scenes {
         public update(): void {
             this._forest.update();
             this._bonus.update();
-            this._player.update();
+            this._player.update(controls);
             this._enemies.forEach(enemy => {
                 enemy.update();
                 this._collision.check(enemy);

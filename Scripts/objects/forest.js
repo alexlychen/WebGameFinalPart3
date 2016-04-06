@@ -46,8 +46,7 @@ var objects;
             this._checkBounds(-2091);
         };
         return Forest;
-    }(objects.GameObject));
+    })(objects.GameObject);
     objects.Forest = Forest;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=forest.js.map
