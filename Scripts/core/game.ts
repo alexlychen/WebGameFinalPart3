@@ -23,6 +23,12 @@ var stats: Stats;
 var currentScene: objects.Scene;
 var scene: number;
 
+// key values
+var KEYCODE_LEFT: number = 37,
+    KEYCODE_RIGHT: number = 39,
+    KEYCODE_UP: number = 38,
+    KEYCODE_DOWN: number = 40;
+
 // Game Scenes
 var menu: scenes.Menu;
 var intro: scenes.Intro;

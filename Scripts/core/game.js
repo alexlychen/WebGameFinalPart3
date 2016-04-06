@@ -20,6 +20,8 @@ var game;
 var stats;
 var currentScene;
 var scene;
+// key values
+var KEYCODE_LEFT = 37, KEYCODE_RIGHT = 39, KEYCODE_UP = 38, KEYCODE_DOWN = 40;
 // Game Scenes
 var menu;
 var intro;
@@ -134,5 +136,4 @@ function changeScene() {
     console.log(currentScene.numChildren);
 }
 window.onload = preload;
-
 //# sourceMappingURL=game.js.map
