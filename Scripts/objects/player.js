@@ -32,8 +32,17 @@ var objects;
             this._leftBounds = this.width * 0.5;
             this._rightBounds = 400;
             this.x = this.regX;
+            // keyborad event
             window.onkeydown = this._onControlDown;
             window.onkeyup = this._onControlUp;
+            // mouse drag event handler
+            this.on("pressmove", function (evt) {
+                // currentTarget will be the container that the event listener was added to:
+                evt.currentTarget.x = evt.stageX;
+                evt.currentTarget.y = evt.stageY;
+                // make sure to redraw the stage to show the change:
+                this.update();
+            });
         }
         //PRIVATE METHODS
         Player.prototype._checkBounds = function () {
