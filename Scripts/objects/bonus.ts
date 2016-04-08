@@ -21,6 +21,7 @@ module objects {
             super("bonus");
             this._reset(this._rightBounds);
             this.name = "bonus";
+            this.soundString = "bgmGetheart";
         }
         
         // PRIVATE METHODS +++++++++++++++++++++++

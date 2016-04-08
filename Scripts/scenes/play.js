@@ -24,13 +24,22 @@ var scenes;
         // CONSTRUCTOR ++++++++++++++++++++++
         function Play() {
             _super.call(this);
-            //PUBLIC INSTANCE VARIABLES ++++++++++++
-            this.score = 0;
-            this.lives = 5;
         }
+        //PRIVATE METHODS
+        /**
+        * @method _updateScore
+        * @return void
+        */
+        Play.prototype._updateScore = function () {
+            this._livesLabel.text = "Lives: " + livesValue;
+            this._scoreLabel.text = "Score: " + Math.round(scoreValue);
+        };
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         Play.prototype.start = function () {
+            // Set score and lives value
+            livesValue = 5;
+            scoreValue = 0;
             // Add background music
             createjs.Sound.play("backMusic").loop = -1;
             createjs.Sound.volume = 20;
@@ -73,18 +82,10 @@ var scenes;
             this._enemies.forEach(function (enemy) {
                 enemy.update();
                 _this._collision.check(enemy);
-                _this.score += 0.1;
+                scoreValue += 0.1;
             });
             this._collision.check(this._bonus);
-            this._livesLabel.text = "Lives: " + this.lives;
-            this._scoreLabel.text = "Score: " + Math.round(this.score);
-            if (this.lives == 0) {
-                createjs.Sound.stop();
-                // Add dead sound
-                createjs.Sound.play("bgmdead");
-                scene = config.Scene.END;
-                changeScene();
-            }
+            this._updateScore();
         };
         return Play;
     })(objects.Scene);

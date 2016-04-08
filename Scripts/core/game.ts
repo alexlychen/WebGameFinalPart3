@@ -23,6 +23,11 @@ var stats: Stats;
 var currentScene: objects.Scene;
 var scene: number;
 
+// Score and lives values
+var livesValue:number;
+var scoreValue:number;
+var highScoreValue:number = 0;
+
 // key values
 var KEYCODE_LEFT: number = 37,
     KEYCODE_RIGHT: number = 39,

@@ -36,22 +36,36 @@ var managers;
             endPoint.y = object.centerY + object.y;
             // when player crush with objects, it happens something.
             if (this.distance(startPoint, endPoint) < minimumDistance) {
-                // if player meets enemy, his lives will be deducted.
-                if (object.name === "enemy") {
-                    console.log("enemy hit!");
-                    // Add crush with enemy sound
-                    createjs.Sound.play("bgmcrush");
-                    play.lives--;
-                    object._reset(config.Screen.WIDTH + object.width); // reset the enemy when player meets them.
+                if (!object.isColliding) {
+                    // if player meets enemy, his lives will be deducted.
+                    if (object.name === "enemy") {
+                        console.log("enemy hit!");
+                        // Add crush with enemy sound
+                        createjs.Sound.play("bgmcrush");
+                        livesValue--; // lose a life
+                        if (livesValue <= 0) {
+                            createjs.Sound.stop();
+                            // Add dead sound
+                            createjs.Sound.play("bgmdead");
+                            //Show the Game Over Scene
+                            scene = config.Scene.END;
+                            changeScene();
+                        }
+                        object._reset(config.Screen.WIDTH + object.width); // reset the enemy when player meets them.
+                    }
+                    // if player meets heart, his lives will be increased.
+                    if (object.name === "bonus") {
+                        console.log("bonus hit!");
+                        // Add getting a heart sound
+                        createjs.Sound.play("bgmGetheart");
+                        livesValue++; // get a life
+                        object._reset(config.Screen.WIDTH + object.width); // reset the bonus when player meets them.
+                    }
+                    object.isColliding = true;
                 }
-                // if player meets heart, his lives will be increased.
-                if (object.name === "bonus") {
-                    console.log("bonus hit!");
-                    // Add getting a heart sound
-                    createjs.Sound.play("bgmGetheart");
-                    play.lives++;
-                    object._reset(config.Screen.WIDTH + object.width); // reset the bonus when player meets them.
-                }
+            }
+            else {
+                object.isColliding = false;
             }
         };
         return Collision;

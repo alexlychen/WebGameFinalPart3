@@ -26,6 +26,7 @@ var objects;
             _super.call(this, "bonus");
             this._reset(this._rightBounds);
             this.name = "bonus";
+            this.soundString = "bgmGetheart";
         }
         // PRIVATE METHODS +++++++++++++++++++++++
         Bonus.prototype._checkBounds = function (value) {
