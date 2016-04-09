@@ -19,10 +19,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 // PLAY SCENE
 var scenes;
 (function (scenes) {
-    var Play = (function (_super) {
-        __extends(Play, _super);
+    var Level2_Play = (function (_super) {
+        __extends(Level2_Play, _super);
         // CONSTRUCTOR ++++++++++++++++++++++
-        function Play() {
+        function Level2_Play() {
             _super.call(this);
         }
         //PRIVATE METHODS
@@ -30,13 +30,13 @@ var scenes;
         * @method _updateScore
         * @return void
         */
-        Play.prototype._updateScore = function () {
+        Level2_Play.prototype._updateScore = function () {
             this._livesLabel.text = "Lives: " + livesValue;
             this._scoreLabel.text = "Score: " + Math.round(scoreValue);
         };
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
-        Play.prototype.start = function () {
+        Level2_Play.prototype.start = function () {
             // Set score and lives value
             livesValue = 5;
             scoreValue = 0;
@@ -48,8 +48,8 @@ var scenes;
             //Instantiate Enemy array 
             this._enemies = new Array();
             // added forest to the scene
-            this._forest = new objects.Forest();
-            this.addChild(this._forest);
+            this._arctic = new objects.Arctic();
+            this.addChild(this._arctic);
             // added player to the secne
             this._player = new objects.Player();
             this.addChild(this._player);
@@ -74,9 +74,9 @@ var scenes;
             stage.addChild(this);
         };
         // PLAY Scene updates here
-        Play.prototype.update = function () {
+        Level2_Play.prototype.update = function () {
             var _this = this;
-            this._forest.update();
+            this._arctic.update();
             this._bonus.update();
             this._player.update(controls);
             this._enemies.forEach(function (enemy) {
@@ -86,15 +86,9 @@ var scenes;
             });
             this._collision.check(this._bonus);
             this._updateScore();
-            if (scoreValue >= 500) {
-                //Change to Level2 
-                createjs.Sound.stop();
-                scene = config.Scene.LEVEL2_INTRO;
-                changeScene();
-            }
         };
-        return Play;
+        return Level2_Play;
     })(objects.Scene);
-    scenes.Play = Play;
+    scenes.Level2_Play = Level2_Play;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=play.js.map
+//# sourceMappingURL=level2_play.js.map

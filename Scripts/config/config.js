@@ -21,6 +21,8 @@ var config;
         Scene.PLAY = 1;
         Scene.END = 2;
         Scene.INTRO = 3;
+        Scene.LEVEL2_INTRO = 4;
+        Scene.LEVEL2_PLAY = 5;
         return Scene;
     })();
     config.Scene = Scene;

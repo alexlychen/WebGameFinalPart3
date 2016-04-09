@@ -108,6 +108,12 @@ module scenes {
 
             this._collision.check(this._bonus);
             this._updateScore();
+            if (scoreValue >= 500) {
+                //Change to Level2 
+                createjs.Sound.stop();
+                scene = config.Scene.LEVEL2_INTRO;
+                changeScene();
+            }
 
 
         }
