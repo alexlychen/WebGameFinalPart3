@@ -45,8 +45,11 @@ var scenes;
             createjs.Sound.volume = 20;
             //Set Enemy Count
             this._enemyCount = 7;
+            this._level2_enemyCount = 2;
             //Instantiate Enemy array 
             this._enemies = new Array();
+            //Instantiate Level2_Enemy array 
+            this._level2_enemies = new Array();
             // added forest to the scene
             this._arctic = new objects.Arctic();
             this.addChild(this._arctic);
@@ -59,6 +62,11 @@ var scenes;
             for (var enemy = 0; enemy < this._enemyCount; enemy++) {
                 this._enemies[enemy] = new objects.Enemy();
                 this.addChild(this._enemies[enemy]);
+            }
+            // added Level2_enemies to the scene
+            for (var level2_enemy = 0; level2_enemy < this._level2_enemyCount; level2_enemy++) {
+                this._level2_enemies[level2_enemy] = new objects.Level2_Enemy();
+                this.addChild(this._level2_enemies[level2_enemy]);
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
@@ -83,6 +91,10 @@ var scenes;
                 enemy.update();
                 _this._collision.check(enemy);
                 scoreValue += 0.1;
+            });
+            this._level2_enemies.forEach(function (level2_enemy) {
+                level2_enemy.update();
+                _this._collision.check(level2_enemy);
             });
             this._collision.check(this._bonus);
             this._updateScore();

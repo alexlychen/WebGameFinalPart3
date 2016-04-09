@@ -38,7 +38,7 @@ var managers;
             if (this.distance(startPoint, endPoint) < minimumDistance) {
                 if (!object.isColliding) {
                     // if player meets enemy, his lives will be deducted.
-                    if (object.name === "enemy") {
+                    if (object.name === "enemy" || object.name === "enemytwo") {
                         console.log("enemy hit!");
                         // Add crush with enemy sound
                         createjs.Sound.play("bgmcrush");

@@ -13,16 +13,16 @@ Revision History: 1.0
 */
 
 module objects {
-    // Enemy Class +++++++++++++++++++++++
-    export class Enemy extends objects.GameObject {
+    // Level2_Enemy Class +++++++++++++++++++++++
+    export class Level2_Enemy extends objects.GameObject {
         // PRIVATE INSTANCE VARIABLES ++++++++++++++++
 
         // COSTRUCTOR METHODS +++++++++++++++++++++
         constructor() {
-            super("enemy");
+            super("enemytwo");
             this._speed.x = 2.5; //Forest SPEED
             this._reset(this._rightBounds);
-            this.name = "enemy";
+            this.name = "enemytwo";
             this.soundString = "bgmcrush";
         }
         

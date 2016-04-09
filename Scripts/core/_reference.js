@@ -7,6 +7,7 @@
 /// <reference path="../objects/forest.ts" />
 /// <reference path="../objects/arctic.ts" />
 /// <reference path="../objects/enemy.ts" />
+/// <reference path="../objects/level2_enemy.ts" />
 /// <reference path="../objects/bonus.ts" />
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/player.ts" />

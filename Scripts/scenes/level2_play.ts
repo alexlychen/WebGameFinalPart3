@@ -18,8 +18,10 @@ module scenes {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _arctic: objects.Arctic;
         private _enemies: objects.Enemy[];
+        private _level2_enemies: objects.Level2_Enemy[];
         private _bonus: objects.Bonus;
         private _enemyCount: number;
+        private _level2_enemyCount: number;
         private _player: objects.Player;
         private _collision: managers.Collision;
         private _scoreLabel: objects.Label;
@@ -54,9 +56,13 @@ module scenes {
             
             //Set Enemy Count
             this._enemyCount = 7;
+            this._level2_enemyCount = 2;
             
             //Instantiate Enemy array 
             this._enemies = new Array<objects.Enemy>();
+            
+            //Instantiate Level2_Enemy array 
+            this._level2_enemies = new Array<objects.Level2_Enemy>();
                 
             // added forest to the scene
             this._arctic = new objects.Arctic();
@@ -73,6 +79,12 @@ module scenes {
             for (var enemy: number = 0; enemy < this._enemyCount; enemy++) {
                 this._enemies[enemy] = new objects.Enemy();
                 this.addChild(this._enemies[enemy]);
+            }
+            
+            // added Level2_enemies to the scene
+            for (var level2_enemy: number = 0; level2_enemy < this._level2_enemyCount; level2_enemy++) {
+                this._level2_enemies[level2_enemy] = new objects.Level2_Enemy();
+                this.addChild(this._level2_enemies[level2_enemy]);
             }
             
             // added collision manager to the scene
@@ -101,10 +113,16 @@ module scenes {
             this._arctic.update();
             this._bonus.update();
             this._player.update(controls);
+            
             this._enemies.forEach(enemy => {
                 enemy.update();
                 this._collision.check(enemy);
                 scoreValue += 0.1;
+            });
+            
+            this._level2_enemies.forEach(level2_enemy => {
+                level2_enemy.update();
+                this._collision.check(level2_enemy);
             });
 
             this._collision.check(this._bonus);
