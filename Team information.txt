@@ -5,6 +5,9 @@
 
 * Crazy Bird : https://github.com/kkh0811/Assignment3.git
 
+http://rushcrazybirds.azurewebsites.net/
+
+
 Part1  ( Monday April 4)
 1) First draft of External Game Document
 2) Menu Scene : 
