@@ -14,15 +14,15 @@ Revision History: 1.0
 
 module objects {
     // Forest Class +++++++++++++++++++++++
-    export class Forest extends objects.GameObject {
+    export class Arctic extends objects.GameObject {
         // PRIVATE INSTANCE VARIABLES ++++++++++++++++
 
         // COSTRUCTOR METHODS +++++++++++++++++++++
         constructor() {
-            super("forest");
+            super("arctic");
             this._speed.x = 1.5; //Forest SPEED
             this._reset(0);
-            this.name = "forest";
+            this.name = "arctic";
         }
         
         // PRIVATE METHODS +++++++++++++++++++++++
@@ -42,7 +42,7 @@ module objects {
         public update():void {
             // scroll the forest 5 px per frame
             this.x -= this._speed.x;
-            this._checkBounds(-2091);
+            this._checkBounds(-1655);
         }
     }
 }

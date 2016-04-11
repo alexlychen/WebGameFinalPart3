@@ -23,6 +23,11 @@ var stats: Stats;
 var currentScene: objects.Scene;
 var scene: number;
 
+// Score and lives values
+var livesValue: number;
+var scoreValue: number;
+var highScoreValue: number = 0;
+
 // key values
 var KEYCODE_LEFT: number = 37,
     KEYCODE_RIGHT: number = 39,
@@ -33,6 +38,8 @@ var KEYCODE_LEFT: number = 37,
 var menu: scenes.Menu;
 var intro: scenes.Intro;
 var play: scenes.Play;
+var level2_intro: scenes.Level2_Intro;
+var level2_play: scenes.Level2_Play;
 var end: scenes.End;
 
 // Add my assets
@@ -46,6 +53,7 @@ var assetData: objects.Asset[] = [
     { id: "RestartButton", src: "../../Assets/images/RestartButton.png" },
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "forest", src: "../../Assets/images/background2.png" },
+    { id: "arctic", src: "../../Assets/images/background3.png" },
     { id: "master1", src: "../../Assets/images/Bird1.png" },
     { id: "master2", src: "../../Assets/images/Bird2.png" },
     { id: "master3", src: "../../Assets/images/Bird3.png" },
@@ -148,6 +156,20 @@ function changeScene(): void {
             play = new scenes.Play();
             currentScene = play;
             console.log("Starting PLAY Scene");
+            break;
+        case config.Scene.LEVEL2_INTRO:
+            // show the LEVEL2_INTRO scene
+            stage.removeAllChildren();
+            level2_intro = new scenes.Level2_Intro();
+            currentScene = level2_intro;
+            console.log("Starting LEVEL2_INTRO Scene");
+            break;
+        case config.Scene.LEVEL2_PLAY:
+            // show the LEVEL2_PLAY scene
+            stage.removeAllChildren();
+            level2_play = new scenes.Level2_Play();
+            currentScene = level2_play;
+            console.log("Starting LEVEL2_PLAY Scene");
             break;
         case config.Scene.END:
             // show the END scene
