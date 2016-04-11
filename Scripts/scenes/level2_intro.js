@@ -19,15 +19,15 @@ var __extends = (this && this.__extends) || function (d, b) {
 // INTRO SCENE
 var scenes;
 (function (scenes) {
-    var Intro = (function (_super) {
-        __extends(Intro, _super);
+    var Level2_Intro = (function (_super) {
+        __extends(Level2_Intro, _super);
         // CONSTRUCTOR ++++++++++++++++++++++
-        function Intro() {
+        function Level2_Intro() {
             _super.call(this);
         }
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
-        Intro.prototype.start = function () {
+        Level2_Intro.prototype.start = function () {
             //Add background
             this._backgroundImage = new createjs.Bitmap(assets.getResult("intro"));
             this.addChild(this._backgroundImage);
@@ -40,19 +40,19 @@ var scenes;
             stage.addChild(this);
         };
         // INTRO Scene updates here
-        Intro.prototype.update = function () {
+        Level2_Intro.prototype.update = function () {
         };
         //EVENT HANDLERS ++++++++++++++++++++
         // PlayButton click event handler
-        Intro.prototype._startButtonClick = function (event) {
+        Level2_Intro.prototype._startButtonClick = function (event) {
             // Add click sound
             createjs.Sound.play("bgmchicken");
             // Switch to the Play Scene
-            scene = config.Scene.PLAY;
+            scene = config.Scene.LEVEL2_PLAY;
             changeScene();
         };
-        return Intro;
+        return Level2_Intro;
     })(objects.Scene);
-    scenes.Intro = Intro;
+    scenes.Level2_Intro = Level2_Intro;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=intro.js.map
+//# sourceMappingURL=level2_intro.js.map

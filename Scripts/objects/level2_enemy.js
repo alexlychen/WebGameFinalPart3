@@ -1,6 +1,6 @@
 /*
 #######################################################################################
-The name of source file : forest.ts
+The name of source file : enemy.ts
 The information of author :  Giho Kim #300738697
 Last Modified by: Giho Kim
 Last Modified date: 29 March 2016
@@ -18,35 +18,40 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var objects;
 (function (objects) {
-    // Forest Class +++++++++++++++++++++++
-    var Forest = (function (_super) {
-        __extends(Forest, _super);
+    // Level2_Enemy Class +++++++++++++++++++++++
+    var Level2_Enemy = (function (_super) {
+        __extends(Level2_Enemy, _super);
         // PRIVATE INSTANCE VARIABLES ++++++++++++++++
         // COSTRUCTOR METHODS +++++++++++++++++++++
-        function Forest() {
-            _super.call(this, "forest");
-            this._speed.x = 1.5; //Forest SPEED
-            this._reset(0);
-            this.name = "forest";
+        function Level2_Enemy() {
+            _super.call(this, "enemytwo");
+            this._speed.x = 2.5; //Forest SPEED
+            this._reset(this._rightBounds);
+            this.name = "enemytwo";
+            this.soundString = "bgmcrush";
         }
         // PRIVATE METHODS +++++++++++++++++++++++
-        Forest.prototype._checkBounds = function (value) {
-            //console.log(this.x);
+        Level2_Enemy.prototype._checkBounds = function (value) {
+            // has outside the viewport
             if (this.x <= value) {
-                this._reset(0);
+                this._reset(this._rightBounds);
             }
         };
-        // reset the forest offscreen
-        Forest.prototype._reset = function (value) {
+        // reset the enemy offscreen
+        Level2_Enemy.prototype._reset = function (value) {
+            this._speed.x = Math.round((Math.random() * 5) + 3);
+            this._speed.y = Math.round((Math.random() * 5) - 1);
             this.x = value;
+            this.y = Math.floor((Math.random() * this._bottomBounds) + this._topBounds);
         };
-        Forest.prototype.update = function () {
-            // scroll the forest 5 px per frame
+        Level2_Enemy.prototype.update = function () {
+            // scroll the enemy 5 px per frame
             this.x -= this._speed.x;
-            this._checkBounds(-2091);
+            this.y -= this._speed.y;
+            this._checkBounds((-config.Screen.WIDTH) * 2);
         };
-        return Forest;
+        return Level2_Enemy;
     })(objects.GameObject);
-    objects.Forest = Forest;
+    objects.Level2_Enemy = Level2_Enemy;
 })(objects || (objects = {}));
-//# sourceMappingURL=forest.js.map
+//# sourceMappingURL=level2_enemy.js.map

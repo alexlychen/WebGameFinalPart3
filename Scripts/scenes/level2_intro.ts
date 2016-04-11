@@ -11,48 +11,59 @@ Good Luck!
 Revision History: 1.0
 #######################################################################################
 */
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+
 // INTRO SCENE
-var scenes;
-(function (scenes) {
-    var Intro = (function (_super) {
-        __extends(Intro, _super);
+module scenes {
+    export class Level2_Intro extends objects.Scene {
+        //PRIVATE INSTANCE VARIABLES ++++++++++++
+        private _startButton: objects.Button;
+        private _backgroundImage: createjs.Bitmap;
+        
         // CONSTRUCTOR ++++++++++++++++++++++
-        function Intro() {
-            _super.call(this);
+        constructor() {
+            super();
         }
+        
         // PUBLIC METHODS +++++++++++++++++++++
+        
         // Start Method
-        Intro.prototype.start = function () {
+        public start(): void {
+            
             //Add background
             this._backgroundImage = new createjs.Bitmap(assets.getResult("intro"));
             this.addChild(this._backgroundImage);
+               
             // add the Start button to the MENU scene
-            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X - 10, config.Screen.CENTER_Y + 175, true);
+            this._startButton = new objects.Button(
+                "StartButton",
+                config.Screen.CENTER_X - 10,
+                config.Screen.CENTER_Y + 175, true);
             this.addChild(this._startButton);
+            
             // Start Button event listener
             this._startButton.on("click", this._startButtonClick, this);
+            
+            
             // add this scene to the global stage container
             stage.addChild(this);
-        };
+        }
+
         // INTRO Scene updates here
-        Intro.prototype.update = function () {
-        };
+        public update(): void {
+
+        }
+        
+        
         //EVENT HANDLERS ++++++++++++++++++++
+        
         // PlayButton click event handler
-        Intro.prototype._startButtonClick = function (event) {
+        private _startButtonClick(event: createjs.MouseEvent) {
             // Add click sound
             createjs.Sound.play("bgmchicken");
             // Switch to the Play Scene
-            scene = config.Scene.PLAY;
+            scene = config.Scene.LEVEL2_PLAY;
             changeScene();
-        };
-        return Intro;
-    })(objects.Scene);
-    scenes.Intro = Intro;
-})(scenes || (scenes = {}));
-//# sourceMappingURL=intro.js.map
+        }
+
+    }
+}

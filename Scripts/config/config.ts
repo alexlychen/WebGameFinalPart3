@@ -19,6 +19,8 @@ module config {
         public static PLAY: number = 1;
         public static END: number = 2;
         public static INTRO: number = 3;
+        public static LEVEL2_INTRO:number = 4;
+        public static LEVEL2_PLAY:number = 5;
     }
     
     

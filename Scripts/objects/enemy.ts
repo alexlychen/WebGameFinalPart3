@@ -23,6 +23,7 @@ module objects {
             this._speed.x = 2.5; //Forest SPEED
             this._reset(this._rightBounds);
             this.name = "enemy";
+            this.soundString = "bgmcrush";
         }
         
         // PRIVATE METHODS +++++++++++++++++++++++
@@ -35,7 +36,7 @@ module objects {
         }
         
         // reset the enemy offscreen
-        protected _reset(value:number):void {
+        public _reset(value:number):void {
             this._speed.x = Math.round((Math.random()*5) +3);
             this._speed.y = Math.round((Math.random()*5) -1);
             this.x = value;

@@ -28,6 +28,10 @@ var scenes;
         // PUBLIC METHODS ++++++++++++++++++++
         // Start Method
         End.prototype.start = function () {
+            //Set High Score Value
+            if (scoreValue > highScoreValue) {
+                highScoreValue = scoreValue;
+            }
             //Add background
             this._backgroundImage = new createjs.Bitmap(assets.getResult("endback"));
             this._backgroundImage.x = 0;
@@ -38,6 +42,9 @@ var scenes;
             //Add Score Label 
             this._scoreLabel = new objects.Label("Score:", "40px Candara Bold Italic", "#FFFFFF", 290, 124, false);
             this.addChild(this._scoreLabel);
+            //Add HighScore Label 
+            this._highscoreLabel = new objects.Label("High Score:", "40px Candara Bold Italic", "#FF4A4A", 190, 174, false);
+            this.addChild(this._highscoreLabel);
             // add the BACK button to the OVER scene
             this._restartButton = new objects.Button("RestartButton", config.Screen.CENTER_X - 10, config.Screen.CENTER_Y + 175, true);
             this.addChild(this._restartButton);
@@ -48,7 +55,8 @@ var scenes;
         };
         // PLAY Scene updates here
         End.prototype.update = function () {
-            this._scoreLabel.text = "" + Math.round(play.score);
+            this._scoreLabel.text = "" + Math.round(scoreValue);
+            this._highscoreLabel.text = "High Score : " + Math.round(highScoreValue);
         };
         //EVENT HANDLERS ++++++++++++++++++++
         // ReStart Button click event handler
@@ -60,8 +68,7 @@ var scenes;
             changeScene();
         };
         return End;
-    }(objects.Scene));
+    })(objects.Scene);
     scenes.End = End;
 })(scenes || (scenes = {}));
-
 //# sourceMappingURL=end.js.map

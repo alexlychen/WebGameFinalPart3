@@ -29,6 +29,7 @@ var objects;
             this.height = this.getBounds().height;
             this.centerX = this.width * 0.5;
             this.centerY = this.height * 0.5;
+            this.isColliding = false;
             this._topBounds = this.height;
             this._bottomBounds = config.Screen.HEIGHT - this.height;
             this._leftBounds = -this.width;
@@ -53,8 +54,7 @@ var objects;
             this._checkBounds(boundValue);
         };
         return GameObject;
-    }(createjs.Bitmap));
+    })(createjs.Bitmap);
     objects.GameObject = GameObject;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=gameobject.js.map

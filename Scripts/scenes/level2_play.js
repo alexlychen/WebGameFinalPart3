@@ -19,10 +19,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 // PLAY SCENE
 var scenes;
 (function (scenes) {
-    var Play = (function (_super) {
-        __extends(Play, _super);
+    var Level2_Play = (function (_super) {
+        __extends(Level2_Play, _super);
         // CONSTRUCTOR ++++++++++++++++++++++
-        function Play() {
+        function Level2_Play() {
             _super.call(this);
         }
         //PRIVATE METHODS
@@ -30,13 +30,13 @@ var scenes;
         * @method _updateScore
         * @return void
         */
-        Play.prototype._updateScore = function () {
+        Level2_Play.prototype._updateScore = function () {
             this._livesLabel.text = "Lives: " + livesValue;
             this._scoreLabel.text = "Score: " + Math.round(scoreValue);
         };
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
-        Play.prototype.start = function () {
+        Level2_Play.prototype.start = function () {
             // Set score and lives value
             livesValue = 5;
             scoreValue = 0;
@@ -45,11 +45,14 @@ var scenes;
             createjs.Sound.volume = 20;
             //Set Enemy Count
             this._enemyCount = 7;
+            this._level2_enemyCount = 2;
             //Instantiate Enemy array 
             this._enemies = new Array();
+            //Instantiate Level2_Enemy array 
+            this._level2_enemies = new Array();
             // added forest to the scene
-            this._forest = new objects.Forest();
-            this.addChild(this._forest);
+            this._arctic = new objects.Arctic();
+            this.addChild(this._arctic);
             // added player to the secne
             this._player = new objects.Player();
             this.addChild(this._player);
@@ -59,6 +62,11 @@ var scenes;
             for (var enemy = 0; enemy < this._enemyCount; enemy++) {
                 this._enemies[enemy] = new objects.Enemy();
                 this.addChild(this._enemies[enemy]);
+            }
+            // added Level2_enemies to the scene
+            for (var level2_enemy = 0; level2_enemy < this._level2_enemyCount; level2_enemy++) {
+                this._level2_enemies[level2_enemy] = new objects.Level2_Enemy();
+                this.addChild(this._level2_enemies[level2_enemy]);
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
@@ -74,9 +82,9 @@ var scenes;
             stage.addChild(this);
         };
         // PLAY Scene updates here
-        Play.prototype.update = function () {
+        Level2_Play.prototype.update = function () {
             var _this = this;
-            this._forest.update();
+            this._arctic.update();
             this._bonus.update();
             this._player.update(controls);
             this._enemies.forEach(function (enemy) {
@@ -84,17 +92,15 @@ var scenes;
                 _this._collision.check(enemy);
                 scoreValue += 0.1;
             });
+            this._level2_enemies.forEach(function (level2_enemy) {
+                level2_enemy.update();
+                _this._collision.check(level2_enemy);
+            });
             this._collision.check(this._bonus);
             this._updateScore();
-            if (scoreValue >= 500) {
-                //Change to Level2 
-                createjs.Sound.stop();
-                scene = config.Scene.LEVEL2_INTRO;
-                changeScene();
-            }
         };
-        return Play;
+        return Level2_Play;
     })(objects.Scene);
-    scenes.Play = Play;
+    scenes.Level2_Play = Level2_Play;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=play.js.map
+//# sourceMappingURL=level2_play.js.map

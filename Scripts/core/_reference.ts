@@ -8,14 +8,19 @@
 /// <reference path="../objects/scene.ts" />
 
 /// <reference path="../objects/forest.ts" />
+/// <reference path="../objects/arctic.ts" />
 /// <reference path="../objects/enemy.ts" />
+/// <reference path="../objects/level2_enemy.ts" />
 /// <reference path="../objects/bonus.ts" />
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/player.ts" />
 
 /// <reference path="../managers/collision.ts" />
+/// <reference path="../controls/controls.ts" />
 
 /// <reference path="../scenes/end.ts" />
 /// <reference path="../scenes/play.ts" />
+/// <reference path="../scenes/level2_play.ts" />
 /// <reference path="../scenes/menu.ts" />
 /// <reference path="../scenes/intro.ts" />
+/// <reference path="../scenes/level2_intro.ts" />

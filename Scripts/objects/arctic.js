@@ -11,38 +11,42 @@ Good Luck!
 Revision History: 1.0
 #######################################################################################
 */
-
-module objects {
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var objects;
+(function (objects) {
     // Forest Class +++++++++++++++++++++++
-    export class Forest extends objects.GameObject {
+    var Arctic = (function (_super) {
+        __extends(Arctic, _super);
         // PRIVATE INSTANCE VARIABLES ++++++++++++++++
-
         // COSTRUCTOR METHODS +++++++++++++++++++++
-        constructor() {
-            super("forest");
+        function Arctic() {
+            _super.call(this, "arctic");
             this._speed.x = 1.5; //Forest SPEED
             this._reset(0);
-            this.name = "forest";
+            this.name = "arctic";
         }
-        
         // PRIVATE METHODS +++++++++++++++++++++++
-        protected _checkBounds(value:number):void {
+        Arctic.prototype._checkBounds = function (value) {
             //console.log(this.x);
-            if(this.x <= value)
-            {
+            if (this.x <= value) {
                 this._reset(0);
             }
-        }
-        
+        };
         // reset the forest offscreen
-        public _reset(value:number):void {
+        Arctic.prototype._reset = function (value) {
             this.x = value;
-        }
-        
-        public update():void {
+        };
+        Arctic.prototype.update = function () {
             // scroll the forest 5 px per frame
             this.x -= this._speed.x;
-            this._checkBounds(-2091);
-        }
-    }
-}
+            this._checkBounds(-1655);
+        };
+        return Arctic;
+    })(objects.GameObject);
+    objects.Arctic = Arctic;
+})(objects || (objects = {}));
+//# sourceMappingURL=arctic.js.map

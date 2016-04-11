@@ -29,7 +29,20 @@ var objects;
             this.regY = this.height * 0.5;
             this._topBounds = this.height * 0.5;
             this._bottomBounds = config.Screen.HEIGHT - this.height * 0.5;
+            this._leftBounds = this.width * 0.5;
+            this._rightBounds = 400;
             this.x = this.regX;
+            // keyborad event
+            window.onkeydown = this._onControlDown;
+            window.onkeyup = this._onControlUp;
+            // mouse drag event handler
+            this.on("pressmove", function (evt) {
+                // currentTarget will be the container that the event listener was added to:
+                evt.currentTarget.x = evt.stageX;
+                evt.currentTarget.y = evt.stageY;
+                // make sure to redraw the stage to show the change:
+                this.update();
+            });
         }
         //PRIVATE METHODS
         Player.prototype._checkBounds = function () {
@@ -38,6 +51,12 @@ var objects;
             }
             if (this.y > this._bottomBounds) {
                 this.y = this._bottomBounds;
+            }
+            if (this.x < this._leftBounds) {
+                this.x = this._leftBounds;
+            }
+            if (this.x > this._rightBounds) {
+                this.x = this._rightBounds;
             }
         };
         /*
@@ -59,16 +78,61 @@ var objects;
 
         }
         */
+        // press keyborad
+        Player.prototype._onControlDown = function (e) {
+            switch (e.which) {
+                case KEYCODE_LEFT:
+                    controls.left = true;
+                    break;
+                case KEYCODE_RIGHT:
+                    controls.right = true;
+                    break;
+                case KEYCODE_UP:
+                    controls.up = true;
+                    break;
+                case KEYCODE_DOWN:
+                    controls.down = true;
+                    break;
+            }
+        };
+        // release keyborad
+        Player.prototype._onControlUp = function (e) {
+            switch (e.which) {
+                case KEYCODE_LEFT:
+                    controls.left = false;
+                    break;
+                case KEYCODE_RIGHT:
+                    controls.right = false;
+                    break;
+                case KEYCODE_UP:
+                    controls.up = false;
+                    break;
+                case KEYCODE_DOWN:
+                    controls.down = false;
+                    break;
+            }
+        };
         // PUBLIC MEHTODS
-        Player.prototype.update = function () {
-            this.y = stage.mouseY;
+        Player.prototype.update = function (control) {
+            //this.y = stage.mouseY;
+            if (control.down == true) {
+                this.y += 5;
+            }
+            else if (control.up == true) {
+                this.y -= 5;
+            }
+            else if (control.left == true) {
+                this.x -= 5;
+            }
+            else if (control.right == true) {
+                this.x += 5;
+            }
             this._checkBounds();
             //console.log("Shuffle!")
             //this._shuffleImages("");
         };
         return Player;
-    }(createjs.Bitmap));
+    })(createjs.Bitmap);
     objects.Player = Player;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=player.js.map

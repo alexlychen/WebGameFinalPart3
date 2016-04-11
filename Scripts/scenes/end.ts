@@ -16,6 +16,7 @@ module scenes {
     export class End extends objects.Scene {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _endLabel: objects.Label;
+        private _highscoreLabel: objects.Label;
         private _restartButton: objects.Button;
         private _backgroundImage: createjs.Bitmap;
         private _scoreLabel: objects.Label;
@@ -30,6 +31,11 @@ module scenes {
         
         // Start Method
         public start(): void {
+            
+            //Set High Score Value
+            if(scoreValue > highScoreValue){
+                highScoreValue = scoreValue;
+            }
             
             //Add background
             this._backgroundImage = new createjs.Bitmap(assets.getResult("endback"));
@@ -46,6 +52,10 @@ module scenes {
             //Add Score Label 
             this._scoreLabel = new objects.Label("Score:", "40px Candara Bold Italic", "#FFFFFF", 290, 124, false);
             this.addChild(this._scoreLabel);
+            
+            //Add HighScore Label 
+            this._highscoreLabel = new objects.Label("High Score:", "40px Candara Bold Italic", "#FF4A4A", 190, 174, false);
+            this.addChild(this._highscoreLabel);
             
             // add the BACK button to the OVER scene
             this._restartButton = new objects.Button(
@@ -64,8 +74,8 @@ module scenes {
 
         // PLAY Scene updates here
         public update(): void {
-            this._scoreLabel.text = ""+ Math.round(play.score);
-
+            this._scoreLabel.text = "" + Math.round(scoreValue);
+            this._highscoreLabel.text = "High Score : " + Math.round(highScoreValue);
         }
         
         

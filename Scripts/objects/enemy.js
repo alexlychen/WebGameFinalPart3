@@ -28,6 +28,7 @@ var objects;
             this._speed.x = 2.5; //Forest SPEED
             this._reset(this._rightBounds);
             this.name = "enemy";
+            this.soundString = "bgmcrush";
         }
         // PRIVATE METHODS +++++++++++++++++++++++
         Enemy.prototype._checkBounds = function (value) {
@@ -50,8 +51,7 @@ var objects;
             this._checkBounds((-config.Screen.WIDTH) * 2);
         };
         return Enemy;
-    }(objects.GameObject));
+    })(objects.GameObject);
     objects.Enemy = Enemy;
 })(objects || (objects = {}));
-
 //# sourceMappingURL=enemy.js.map

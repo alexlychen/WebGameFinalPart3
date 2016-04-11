@@ -25,19 +25,28 @@ module scenes {
         private _scoreLabel: objects.Label;
         private _livesLabel: objects.Label;
         
-        //PUBLIC INSTANCE VARIABLES ++++++++++++
-        public score: number = 0;
-        public lives: number = 5;
-
 
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
             super();
         }
         
+        //PRIVATE METHODS
+        /**
+        * @method _updateScore
+        * @return void
+        */
+        private _updateScore(): void {
+            this._livesLabel.text = "Lives: " + livesValue;
+            this._scoreLabel.text = "Score: " + Math.round(scoreValue);
+        }
+        
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         public start(): void {   
+            // Set score and lives value
+            livesValue = 5;
+            scoreValue = 0;
             
             // Add background music
             createjs.Sound.play("backMusic").loop = -1;
@@ -90,23 +99,23 @@ module scenes {
         public update(): void {
             this._forest.update();
             this._bonus.update();
-            this._player.update();
+            this._player.update(controls);
             this._enemies.forEach(enemy => {
                 enemy.update();
                 this._collision.check(enemy);
-                this.score += 0.1;
+                scoreValue += 0.1;
             });
 
             this._collision.check(this._bonus);
-            this._livesLabel.text = "Lives: " + this.lives;
-            this._scoreLabel.text = "Score: " + Math.round(this.score);
-            if (this.lives == 0) {              // if player's lives are zero, change the scene to the end scene. 
+            this._updateScore();
+            if (scoreValue >= 500) {
+                //Change to Level2 
                 createjs.Sound.stop();
-                // Add dead sound
-                createjs.Sound.play("bgmdead");
-                scene = config.Scene.END;
+                scene = config.Scene.LEVEL2_INTRO;
                 changeScene();
             }
+
+
         }
     }
 }
