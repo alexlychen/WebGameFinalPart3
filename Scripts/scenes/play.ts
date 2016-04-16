@@ -24,7 +24,7 @@ module scenes {
         private _collision: managers.Collision;
         private _scoreLabel: objects.Label;
         private _livesLabel: objects.Label;
-        
+        private _shot: managers.Shot;
 
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
@@ -75,8 +75,9 @@ module scenes {
             }
             
             // added collision manager to the scene
-            this._collision = new managers.Collision(this._player)
-            
+            this._collision = new managers.Collision(this._player);
+            //this._shoot = new managers.Shoot();
+            this._shot = new managers.Shot();
             
             // added bonus to the scene
             this._bonus = new objects.Bonus();
@@ -100,6 +101,15 @@ module scenes {
             this._forest.update();
             this._bonus.update();
             this._player.update(controls);
+            //this._shoot.check(this._player, this._enemies);
+            
+            this._player._bullets.forEach(bullet =>{
+                this._enemies.forEach(enemy => {
+                    enemy.update();
+                    this._shot.check(bullet, enemy);
+                });
+            });
+            
             this._enemies.forEach(enemy => {
                 enemy.update();
                 this._collision.check(enemy);
@@ -107,6 +117,7 @@ module scenes {
             });
 
             this._collision.check(this._bonus);
+               
             this._updateScore();
             if (scoreValue >= 500) {
                 //Change to Level2 

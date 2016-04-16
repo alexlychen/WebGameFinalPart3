@@ -21,7 +21,6 @@ var scenes;
 (function (scenes) {
     var Level2_Play = (function (_super) {
         __extends(Level2_Play, _super);
-        // CONSTRUCTOR ++++++++++++++++++++++
         function Level2_Play() {
             _super.call(this);
         }
@@ -70,6 +69,7 @@ var scenes;
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
+            this._shot = new managers.Shot();
             // added bonus to the scene
             this._bonus = new objects.Bonus();
             this.addChild(this._bonus);
@@ -97,10 +97,17 @@ var scenes;
                 _this._collision.check(level2_enemy);
             });
             this._collision.check(this._bonus);
+            this._player._bullets.forEach(function (bullet) {
+                _this._enemies.forEach(function (enemy) {
+                    enemy.update();
+                    _this._shot.check(bullet, enemy);
+                });
+            });
             this._updateScore();
         };
         return Level2_Play;
-    })(objects.Scene);
+    }(objects.Scene));
     scenes.Level2_Play = Level2_Play;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=level2_play.js.map

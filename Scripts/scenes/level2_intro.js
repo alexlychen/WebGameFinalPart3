@@ -52,7 +52,8 @@ var scenes;
             changeScene();
         };
         return Level2_Intro;
-    })(objects.Scene);
+    }(objects.Scene));
     scenes.Level2_Intro = Level2_Intro;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=level2_intro.js.map

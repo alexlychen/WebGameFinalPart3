@@ -43,6 +43,11 @@ var objects;
                 // make sure to redraw the stage to show the change:
                 this.update();
             });
+            //prepare bullets to the scene
+            this._interval = 0;
+            this._bulletCount = 0;
+            this._bullets = new Array();
+            this.canfire = true;
         }
         //PRIVATE METHODS
         Player.prototype._checkBounds = function () {
@@ -93,6 +98,9 @@ var objects;
                 case KEYCODE_DOWN:
                     controls.down = true;
                     break;
+                case KEYCODE_SPACE:
+                    controls.space = true; //player shoots
+                    break;
             }
         };
         // release keyborad
@@ -109,6 +117,9 @@ var objects;
                     break;
                 case KEYCODE_DOWN:
                     controls.down = false;
+                    break;
+                case KEYCODE_SPACE:
+                    controls.space = false;
                     break;
             }
         };
@@ -130,9 +141,38 @@ var objects;
             this._checkBounds();
             //console.log("Shuffle!")
             //this._shuffleImages("");
+            //shoot a bullet
+            if (control.space == true && this.canfire == true) {
+                var bullet = new objects.Bullet(this.x, this.y);
+                this._bullets.push(bullet);
+                stage.addChild(bullet);
+                this._bulletCount++;
+                this.canfire = false;
+            }
+            if (controls.space == false) {
+                this.canfire = true;
+            }
+            //update bullet position
+            this._bullets.forEach(function (bullet) {
+                bullet.update();
+            });
+            //bullet out of scene
+            for (var i = 0; i < this._bulletCount; i++) {
+                if (this._bullets[i].outOfSceneCheck()) {
+                    this._bullets.splice(i, 1);
+                    stage.removeChild(this._bullets[i]);
+                    this._bulletCount--;
+                }
+                if (this._bullets[i].isColliding) {
+                    this._bullets.splice(i, 1);
+                    this._bulletCount--;
+                }
+            }
+            //console.log("_bulletCount: ", this._bulletCount);
         };
         return Player;
-    })(createjs.Bitmap);
+    }(createjs.Bitmap));
     objects.Player = Player;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=player.js.map

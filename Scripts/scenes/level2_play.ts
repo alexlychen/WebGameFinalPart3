@@ -26,9 +26,8 @@ module scenes {
         private _collision: managers.Collision;
         private _scoreLabel: objects.Label;
         private _livesLabel: objects.Label;
-        
-
-        // CONSTRUCTOR ++++++++++++++++++++++
+        private _shot: managers.Shot;
+                
         constructor() {
             super();
         }
@@ -88,15 +87,13 @@ module scenes {
             }
             
             // added collision manager to the scene
-            this._collision = new managers.Collision(this._player)
-            
+            this._collision = new managers.Collision(this._player);
+            this._shot = new managers.Shot();
             
             // added bonus to the scene
             this._bonus = new objects.Bonus();
             this.addChild(this._bonus);
-            
-
-            
+                        
             // added lives and score labels to the scene
             this._livesLabel = new objects.Label("Lives:", "40px Candara Bold Italic", "#FF0000", 20, 0, false);
             this.addChild(this._livesLabel);
@@ -114,6 +111,7 @@ module scenes {
             this._bonus.update();
             this._player.update(controls);
             
+            
             this._enemies.forEach(enemy => {
                 enemy.update();
                 this._collision.check(enemy);
@@ -123,12 +121,18 @@ module scenes {
             this._level2_enemies.forEach(level2_enemy => {
                 level2_enemy.update();
                 this._collision.check(level2_enemy);
-            });
-
+            });        
+            
             this._collision.check(this._bonus);
+            
+            this._player._bullets.forEach(bullet =>{
+                this._enemies.forEach(enemy => {
+                    enemy.update();
+                    this._shot.check(bullet, enemy);
+                });
+            });
+            
             this._updateScore();
-
-
         }
     }
 }

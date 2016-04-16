@@ -25,7 +25,7 @@ var livesValue;
 var scoreValue;
 var highScoreValue = 0;
 // key values
-var KEYCODE_LEFT = 37, KEYCODE_RIGHT = 39, KEYCODE_UP = 38, KEYCODE_DOWN = 40;
+var KEYCODE_LEFT = 37, KEYCODE_RIGHT = 39, KEYCODE_UP = 38, KEYCODE_DOWN = 40, KEYCODE_SPACE = 32;
 // Game Scenes
 var menu;
 var intro;
@@ -54,6 +54,7 @@ var assetData = [
     { id: "bonus", src: "../../Assets/images/bonus.png" },
     { id: "endback", src: "../../Assets/images/GameEnd.png" },
     { id: "intro", src: "../../Assets/images/intro.png" },
+    { id: "bullet", src: "../../Assets/images/bullet.png" },
     // Add music
     { id: "backMusic", src: "../../Assets/audio/backmusic.mp3" },
     { id: "bgmchicken", src: "../../Assets/audio/chicken.mp3" },
@@ -157,4 +158,5 @@ function changeScene() {
     console.log(currentScene.numChildren);
 }
 window.onload = preload;
+
 //# sourceMappingURL=game.js.map

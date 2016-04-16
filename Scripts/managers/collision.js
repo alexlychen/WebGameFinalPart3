@@ -21,7 +21,7 @@ var managers;
         }
         // PUBLIC METHODS +++++++++++++++++++++++
         Collision.prototype.distance = function (startPoint, endPoint) {
-            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow(endPoint.y - startPoint.y, 2));
+            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow((endPoint.y - startPoint.y), 2));
         };
         // figure the collision between the play and objects like bonus or enemy 
         Collision.prototype.check = function (object) {
@@ -69,7 +69,82 @@ var managers;
             }
         };
         return Collision;
-    })();
+    }());
     managers.Collision = Collision;
+    var Shoot = (function () {
+        function Shoot() {
+            this._name = "Shoot";
+        }
+        Shoot.prototype.distance = function (startPoint, endPoint) {
+            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow((endPoint.y - startPoint.y), 2));
+        };
+        Shoot.prototype.check = function (player, objects) {
+            var startPoints = new Array();
+            var endPoints = new Array();
+            console.log("_bulletCount: ", player._bulletCount);
+            for (var i = 0; i < player._bulletCount; i++) {
+                var bulletHalfWidth = player._bullets[i].width * 0.5;
+                startPoints[i].x = player._bullets[i].x;
+                startPoints[i].y = player._bullets[i].x;
+                console.log("bullet B...");
+                for (var j = 0; j < objects.length; j++) {
+                    var objectHalfWidth = objects[j].width * 0.5;
+                    var minimumDistance = bulletHalfWidth + objectHalfWidth;
+                    endPoints[j].x = objects[j].centerX + objects[j].x;
+                    endPoints[j].y = objects[j].centerY + objects[j].y;
+                    console.log("bullet C...");
+                    if (this.distance(startPoints[i], endPoints[i]) < minimumDistance) {
+                        player._bullets[i].isColliding = true;
+                        objects[j].isColliding = true; //shoot you!
+                        if (objects[j].name === "enemy" || objects[j].name === "enemytwo") {
+                            console.log("shot enemy");
+                            createjs.Sound.play("bgmcrush");
+                            objects[j]._reset(config.Screen.WIDTH + objects[j].width);
+                        }
+                    }
+                    else {
+                        objects[j].isColliding = false;
+                    }
+                }
+            }
+        };
+        return Shoot;
+    }());
+    managers.Shoot = Shoot;
+    var Shot = (function () {
+        function Shot() {
+            this._name = "Shoot";
+        }
+        Shot.prototype.distance = function (startPoint, endPoint) {
+            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow((endPoint.y - startPoint.y), 2));
+        };
+        Shot.prototype.check = function (bullet, object) {
+            var startPoint = new createjs.Point();
+            var endPoint = new createjs.Point();
+            var bulletHalfWidth = bullet.width * 0.5;
+            startPoint.x = bullet.x;
+            startPoint.y = bullet.x;
+            var objectHalfWidth = object.width * 0.5;
+            var minimumDistance = bulletHalfWidth + objectHalfWidth;
+            endPoint.x = object.centerX + object.x;
+            endPoint.y = object.centerY + object.y;
+            if (this.distance(startPoint, endPoint) < minimumDistance) {
+                bullet.isColliding = true;
+                stage.removeChild(bullet);
+                object.isColliding = true; //shoot you!
+                if (object.name === "enemy" || object.name === "enemytwo") {
+                    console.log("shot enemy");
+                    createjs.Sound.play("bgmcrush");
+                    object._reset(config.Screen.WIDTH + object.width);
+                }
+            }
+            else {
+                object.isColliding = false;
+            }
+        };
+        return Shot;
+    }());
+    managers.Shot = Shot;
 })(managers || (managers = {}));
+
 //# sourceMappingURL=collision.js.map

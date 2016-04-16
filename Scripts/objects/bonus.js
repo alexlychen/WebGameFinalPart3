@@ -49,7 +49,8 @@ var objects;
             this._checkBounds((-config.Screen.WIDTH) * 2);
         };
         return Bonus;
-    })(objects.GameObject);
+    }(objects.GameObject));
     objects.Bonus = Bonus;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=bonus.js.map

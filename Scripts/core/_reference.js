@@ -11,6 +11,7 @@
 /// <reference path="../objects/bonus.ts" />
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/player.ts" />
+/// <reference path="../objects/bullet.ts" />
 /// <reference path="../managers/collision.ts" />
 /// <reference path="../controls/controls.ts" />
 /// <reference path="../scenes/end.ts" />
@@ -19,4 +20,5 @@
 /// <reference path="../scenes/menu.ts" />
 /// <reference path="../scenes/intro.ts" />
 /// <reference path="../scenes/level2_intro.ts" /> 
+
 //# sourceMappingURL=_reference.js.map

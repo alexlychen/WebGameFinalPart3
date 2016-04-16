@@ -62,6 +62,8 @@ var scenes;
             }
             // added collision manager to the scene
             this._collision = new managers.Collision(this._player);
+            //this._shoot = new managers.Shoot();
+            this._shot = new managers.Shot();
             // added bonus to the scene
             this._bonus = new objects.Bonus();
             this.addChild(this._bonus);
@@ -79,6 +81,13 @@ var scenes;
             this._forest.update();
             this._bonus.update();
             this._player.update(controls);
+            //this._shoot.check(this._player, this._enemies);
+            this._player._bullets.forEach(function (bullet) {
+                _this._enemies.forEach(function (enemy) {
+                    enemy.update();
+                    _this._shot.check(bullet, enemy);
+                });
+            });
             this._enemies.forEach(function (enemy) {
                 enemy.update();
                 _this._collision.check(enemy);
@@ -94,7 +103,8 @@ var scenes;
             }
         };
         return Play;
-    })(objects.Scene);
+    }(objects.Scene));
     scenes.Play = Play;
 })(scenes || (scenes = {}));
+
 //# sourceMappingURL=play.js.map

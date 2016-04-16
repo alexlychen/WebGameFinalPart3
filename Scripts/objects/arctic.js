@@ -46,7 +46,8 @@ var objects;
             this._checkBounds(-1655);
         };
         return Arctic;
-    })(objects.GameObject);
+    }(objects.GameObject));
     objects.Arctic = Arctic;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=arctic.js.map

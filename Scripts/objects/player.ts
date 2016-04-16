@@ -20,10 +20,16 @@ module objects {
         private _bottomBounds: number;
         private _leftBounds: number;
         private _rightBounds: number;
-
+        private _interval:number;
+        
+        public _bullets: objects.Bullet[];
+        public _bulletCount:number;
+        public canfire: boolean;
+        
         // PUBLIC INSTANCE VARIABLES
         public width: number;
         public height: number;
+        
         constructor() {
             super(assets.getResult("master1"));
 
@@ -53,6 +59,11 @@ module objects {
                 this.update();
             });
 
+            //prepare bullets to the scene
+            this._interval = 0;
+            this._bulletCount = 0;            
+            this._bullets = new Array<objects.Bullet>();
+            this.canfire = true;
         }
 
         //PRIVATE METHODS
@@ -106,6 +117,9 @@ module objects {
                 case KEYCODE_DOWN:
                     controls.down = true;
                     break;
+                case KEYCODE_SPACE:
+                    controls.space = true; //player shoots
+                    break;
             }
         }
 
@@ -123,6 +137,10 @@ module objects {
                     break;
                 case KEYCODE_DOWN:
                     controls.down = false;
+                    break;
+                case KEYCODE_SPACE:
+                    controls.space = false;
+                   
                     break;
             }
         }
@@ -146,6 +164,40 @@ module objects {
             //console.log("Shuffle!")
             //this._shuffleImages("");
 
+            //shoot a bullet
+            if (control.space == true && this.canfire == true) {
+                var bullet: objects.Bullet= new objects.Bullet(this.x, this.y);
+                this._bullets.push(bullet);
+                stage.addChild(bullet);
+                this._bulletCount++;
+                this.canfire = false;
+            }
+            
+            if(controls.space == false){  //release the space bar 
+                this.canfire = true;
+            }
+             
+            //update bullet position
+            this._bullets.forEach(bullet =>{
+                bullet.update(); 
+            });
+                        
+            //bullet out of scene
+            for(var i=0; i < this._bulletCount; i++){
+                
+                if(this._bullets[i].outOfSceneCheck()){
+                    this._bullets.splice(i,1);
+                    stage.removeChild(this._bullets[i]);
+                    this._bulletCount--;
+                }
+                
+                if(this._bullets[i].isColliding){
+                    this._bullets.splice(i,1);
+                    this._bulletCount--;
+                }
+            }
+            
+            //console.log("_bulletCount: ", this._bulletCount);
         }
     }
 }

@@ -32,8 +32,9 @@ var highScoreValue: number = 0;
 var KEYCODE_LEFT: number = 37,
     KEYCODE_RIGHT: number = 39,
     KEYCODE_UP: number = 38,
-    KEYCODE_DOWN: number = 40;
-
+    KEYCODE_DOWN: number = 40,
+    KEYCODE_SPACE: number = 32;
+    
 // Game Scenes
 var menu: scenes.Menu;
 var intro: scenes.Intro;
@@ -63,6 +64,7 @@ var assetData: objects.Asset[] = [
     { id: "bonus", src: "../../Assets/images/bonus.png" },
     { id: "endback", src: "../../Assets/images/GameEnd.png" },
     { id: "intro", src: "../../Assets/images/intro.png" },
+    { id: "bullet", src: "../../Assets/images/bullet.png" },
     
     // Add music
     { id: "backMusic", src: "../../Assets/audio/backmusic.mp3" },

@@ -54,7 +54,8 @@ var objects;
             this._checkBounds(boundValue);
         };
         return GameObject;
-    })(createjs.Bitmap);
+    }(createjs.Bitmap));
     objects.GameObject = GameObject;
 })(objects || (objects = {}));
+
 //# sourceMappingURL=gameobject.js.map

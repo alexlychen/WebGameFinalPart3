@@ -17,17 +17,17 @@ module managers {
     export class Collision {
         //PRIVATE INSTANCE VARIABLES
         private _player: objects.Player;
-        
+
         // CONSTRUCTOR +++++++++++++++++++++
         constructor(player: objects.Player) {
             this._player = player;
         }
-        
+
         // PUBLIC METHODS +++++++++++++++++++++++
         public distance(startPoint: createjs.Point, endPoint: createjs.Point): number {
-            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow(endPoint.y - startPoint.y, 2))
+            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow((endPoint.y - startPoint.y), 2))
         }
-        
+
         // figure the collision between the play and objects like bonus or enemy 
         public check(object: objects.GameObject) {
             var startPoint: createjs.Point = new createjs.Point();
@@ -41,12 +41,12 @@ module managers {
 
             endPoint.x = object.centerX + object.x;
             endPoint.y = object.centerY + object.y;
-            
+
             // when player crush with objects, it happens something.
             if (this.distance(startPoint, endPoint) < minimumDistance) {
-                if (!object.isColliding) {                  
+                if (!object.isColliding) {
                     // if player meets enemy, his lives will be deducted.
-                    if (object.name === "enemy" || object.name==="enemytwo") {
+                    if (object.name === "enemy" || object.name === "enemytwo") {
                         console.log("enemy hit!");
                         // Add crush with enemy sound
                         createjs.Sound.play("bgmcrush");
@@ -61,7 +61,7 @@ module managers {
                         }
                         object._reset(config.Screen.WIDTH + object.width);         // reset the enemy when player meets them.
                     }
-       
+
                     // if player meets heart, his lives will be increased.
                     if (object.name === "bonus") {
                         console.log("bonus hit!");
@@ -78,4 +78,104 @@ module managers {
             }
         }
     }
+
+    export class Shoot {
+
+        private _name: String;
+       
+        constructor() {
+            this._name = "Shoot";
+        }
+
+        public distance(startPoint: createjs.Point, endPoint: createjs.Point): number {
+            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow((endPoint.y - startPoint.y), 2))
+        }
+
+        public check(player: objects.Player, objects: objects.GameObject[]) {
+            
+            var startPoints: createjs.Point[] = new Array<createjs.Point>();
+            var endPoints: createjs.Point[] = new Array<createjs.Point>();
+            console.log("_bulletCount: ", player._bulletCount);
+
+            for (var i = 0; i < player._bulletCount; i++) {
+
+                var bulletHalfWidth: number = player._bullets[i].width * 0.5;
+                startPoints[i].x = player._bullets[i].x;
+                startPoints[i].y = player._bullets[i].x;
+                console.log("bullet B...");
+
+                for (var j = 0; j < objects.length; j++) {
+
+                    var objectHalfWidth: number = objects[j].width * 0.5;
+                    var minimumDistance: number = bulletHalfWidth + objectHalfWidth;
+
+                    endPoints[j].x = objects[j].centerX + objects[j].x;
+                    endPoints[j].y = objects[j].centerY + objects[j].y;
+                    console.log("bullet C...");
+
+                    if (this.distance(startPoints[i], endPoints[i]) < minimumDistance) {
+
+                        player._bullets[i].isColliding = true;
+                        objects[j].isColliding = true;//shoot you!
+
+                        if (objects[j].name === "enemy" || objects[j].name === "enemytwo") {
+                            console.log("shot enemy");
+                            createjs.Sound.play("bgmcrush");
+                            objects[j]._reset(config.Screen.WIDTH + objects[j].width);
+                        }
+                    } else {
+                        objects[j].isColliding = false;
+                    }
+                }
+            }
+        }
+    }
+
+    export class Shot {
+
+        private _name: String;
+
+        constructor() {
+            this._name = "Shoot";
+        }
+
+        public distance(startPoint: createjs.Point, endPoint: createjs.Point): number {
+            return Math.sqrt(Math.pow((endPoint.x - startPoint.x), 2) + Math.pow((endPoint.y - startPoint.y), 2))
+        }
+
+        public check(bullet: objects.Bullet, object: objects.GameObject) {
+
+            var startPoint: createjs.Point = new createjs.Point();
+            var endPoint: createjs.Point = new createjs.Point();
+
+            var bulletHalfWidth: number = bullet.width * 0.5;
+            startPoint.x = bullet.x;
+            startPoint.y = bullet.x;
+
+            var objectHalfWidth: number = object.width * 0.5;
+            var minimumDistance: number = bulletHalfWidth + objectHalfWidth;
+
+            endPoint.x = object.centerX + object.x;
+            endPoint.y = object.centerY + object.y;
+
+            if (this.distance(startPoint, endPoint) < minimumDistance) {
+
+                bullet.isColliding = true;
+                stage.removeChild(bullet);
+                
+                object.isColliding = true;//shoot you!
+
+                if (object.name === "enemy" || object.name === "enemytwo") {
+                    console.log("shot enemy");
+                    createjs.Sound.play("bgmcrush");
+                    object._reset(config.Screen.WIDTH + object.width);
+                }
+            } else {
+                object.isColliding = false;
+            }
+        }
+    }
+
+
+
 }

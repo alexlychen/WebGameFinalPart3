@@ -14,6 +14,7 @@
 /// <reference path="../objects/bonus.ts" />
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/player.ts" />
+/// <reference path="../objects/bullet.ts" />
 
 /// <reference path="../managers/collision.ts" />
 /// <reference path="../controls/controls.ts" />
